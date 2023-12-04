@@ -19,10 +19,12 @@ export default function CountryList() {
     }, [])
 
     useEffect(() => {
-        fetch(`https://restcountries.com/v3.1/name/${search}`)
-        .then(res => res.json())
-        .then(data => setCountries(data))
-        .catch(err => console.log(err));
+        if(search) {
+            fetch(`https://restcountries.com/v3.1/name/${search}`)
+            .then(res => res.json())
+            .then(data => setCountries(data))
+            .catch(err => console.log(err));
+        }
     }, [search])
 
     useEffect(() => {
@@ -34,10 +36,6 @@ export default function CountryList() {
         }
     }, [selectedRegion])
 
-    useEffect(() => {
-        console.log(countries);
-    }, [countries])
-
     const selectContinents = (countriesArray) => {
         let regionsArray = [];
         countriesArray.forEach(country => {         
@@ -45,7 +43,6 @@ export default function CountryList() {
                 regionsArray.push(country.region);
             }
         })
-        console.log(regionsArray);
         return regionsArray;
     }
 

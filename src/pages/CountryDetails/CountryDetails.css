@@ -1,0 +1,37 @@
+.country {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+img {
+    width: 40%;
+    height: 350px;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+.infos {
+    width: 40%;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.neighbours {
+    display: flex;
+    align-items: center;
+}
+
+.neighbours button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: 2px rgb(206, 206, 206) solid;
+    border-radius: 5px;
+    background: white;
+}
