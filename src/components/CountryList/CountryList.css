@@ -1,0 +1,16 @@
+section {
+    /* width: ; */
+    padding: 30px;
+    background: white;
+}
+
+.sort-container {
+    display: flex;
+    justify-content: space-between;
+}
+.countries-cards {
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
