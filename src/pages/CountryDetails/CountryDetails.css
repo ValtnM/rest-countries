@@ -1,12 +1,14 @@
 .country {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     margin-top: 50px;
 }
 
-img {
+.country img {
     width: 40%;
-    height: 350px;
+    height: auto;
+    object-fit:fill;
 }
 
 h2 {
@@ -14,7 +16,7 @@ h2 {
 }
 
 .infos {
-    width: 40%;
+    width: 50%;
 }
 
 .details {
@@ -26,6 +28,7 @@ h2 {
 .neighbours {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .neighbours button {
