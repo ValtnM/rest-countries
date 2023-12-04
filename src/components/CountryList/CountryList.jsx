@@ -6,6 +6,7 @@ export default function CountryList() {
     const [countries, setCountries] = useState([]);
     const [regions, setRegions] = useState([]);
     const [selectedRegion, setSelectedRegion] = useState("");
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         fetch('https://restcountries.com/v3.1/all')
@@ -14,13 +15,22 @@ export default function CountryList() {
             setCountries(data);
             setRegions(selectContinents(data));
         })
+        .catch(err => console.log(err));
     }, [])
+
+    useEffect(() => {
+        fetch(`https://restcountries.com/v3.1/name/${search}`)
+        .then(res => res.json())
+        .then(data => setCountries(data))
+        .catch(err => console.log(err));
+    }, [search])
 
     useEffect(() => {
         if(selectedRegion){
             fetch(`https://restcountries.com/v3.1/region/${selectedRegion}`)
             .then(res => res.json())
             .then(data => setCountries(data))
+            .catch(err => console.log(err));
         }
     }, [selectedRegion])
 
@@ -30,12 +40,7 @@ export default function CountryList() {
 
     const selectContinents = (countriesArray) => {
         let regionsArray = [];
-        countriesArray.forEach(country => {
-            // country.continents.forEach(continent => {
-            //     if(!continentsArray.includes(continent)){
-            //         continentsArray.push(continent);
-            //     }
-            // })
+        countriesArray.forEach(country => {         
             if(!regionsArray.includes(country.region)){
                 regionsArray.push(country.region);
             }
@@ -43,6 +48,7 @@ export default function CountryList() {
         console.log(regionsArray);
         return regionsArray;
     }
+
 
 const handleSelect = (e) => {
     setSelectedRegion(e.target.value);
@@ -52,7 +58,7 @@ const handleSelect = (e) => {
     <section>
         <div className="sort-container">            
             <div className="search-bar">
-                <input type="search" placeholder='Search for a country...'/>
+                <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder='Search for a country...'/>
             </div>
             {
                 regions.length > 0 &&
