@@ -17,7 +17,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    console.log("change");
+    sessionStorage.setItem("mode", mode);
   }, [mode])
 
   return (
