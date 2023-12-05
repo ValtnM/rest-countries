@@ -12,7 +12,7 @@ function App() {
     if(sessionStorage.getItem("mode")) {
       setMode(sessionStorage.getItem("mode"));
     } else {
-      sessionStorage.setItem("mode", mode);
+      sessionStorage.setItem("mode", "light");
     }
   }, [])
 
