@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import {Link, useParams} from 'react-router-dom';
 import './CountryDetails.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
 export default function CountryDetails({mode}) {
     const {country} = useParams();
     const [countryDetails, setCountryDetails] = useState();
@@ -39,8 +42,11 @@ export default function CountryDetails({mode}) {
 
   return (
     <section className={mode === "dark" ? "country-details-container dark" : "country-details-container"}>
-        <Link to="/" className="backBtn">
-            <p>Back</p>
+        <Link to="/" >
+            <button className="backBtn">
+                <FontAwesomeIcon icon={faArrowLeft}/>
+                <p>Back</p>
+            </button>
         </Link>
         {
             countryDetails &&
@@ -64,12 +70,14 @@ export default function CountryDetails({mode}) {
                 </div>
                 <div className="neighbours">
                     <p><strong>Border Countries: </strong></p>
+                    <div className='btns'>
                     {
                         borderCountries.length > 0 &&
                         borderCountries.map((country, index) => (
                             <button><Link key={index} to={`/details/${country.name.common}`}>{country.name.common}</Link></button>
                         ))
                     }                    
+                    </div>
                 </div>
             </div>
         </div>

@@ -4,6 +4,12 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: white;
+    color: black;
+}
+
+h1 {
+    font-size: 2rem;
 }
 nav.dark {
     background: #2b3844;
@@ -18,4 +24,10 @@ nav.dark {
 
 .dark-toggle p {
     margin-left: 10px;
+}
+
+@media screen and (max-width:800px) {
+    h1 {
+        font-size: 1rem;
+    }
 }

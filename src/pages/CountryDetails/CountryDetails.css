@@ -1,11 +1,15 @@
 .country-details-container {
     padding: 30px;
     min-height: 100vh;
+    background: white;
+    border-top: 2px rgb(219, 219, 219) solid;
+    line-height: 2rem;
 }
 
 .country-details-container.dark {
     background: #202c36;
     color: white;
+    border: none;
 }
 
 .country-details-container p {
@@ -13,10 +17,16 @@
 }
 
 .backBtn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     padding: 7px 30px;
     background: white;
     color: #111517 ;
+    border-radius: 5px;
+    font-weight: 400;
+}
+.backBtn p {
+    margin-left: 10px;
 }
 
 .dark .backBtn{
@@ -53,14 +63,21 @@ h2 {
 
 .neighbours {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    /* flex-wrap: wrap; */
+}
+.neighbours p {
+    min-width: 150px;
+}
+.btns {
+    display: flex;
     flex-wrap: wrap;
 }
-
 .neighbours button {
     padding: 7px 25px;
-    margin-left: 10px;
+    margin: 0 10px 10px 0;
     border-radius: 5px;
+    border: 1px lightgray solid;
     background: white;
     color: black;
 }
@@ -68,8 +85,41 @@ h2 {
 .dark .neighbours button {
     background: #2B3844;
     color: white;
+    border: none;
 }
 
 .dark a {
     color: white;
+}
+
+@media screen and (max-width: 800px) {
+    .country {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .country img {
+       width: 100%;
+       margin-bottom: 30px;
+    }
+
+    .infos {
+        width: 100%;
+    }
+
+    /* .infos {
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
+        margin: 0;
+    } */
+
+    .details {
+        flex-direction: column;
+    }
+    .details div {
+        margin-bottom: 20px;
+    }
+    .neighbours {
+        flex-direction: column;
+    }
 }
