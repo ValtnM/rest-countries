@@ -1,7 +1,7 @@
 import './CountryList.css';
 import CountryCard from '../CountryCard/CountryCard';
 import { useState, useEffect } from 'react';
-export default function CountryList() {
+export default function CountryList({mode}) {
 
     const [countries, setCountries] = useState([]);
     const [regions, setRegions] = useState([]);
@@ -52,7 +52,7 @@ const handleSelect = (e) => {
 }
 
   return (
-    <section>
+    <section className={mode === "dark" ? 'country-list-container dark' : "country-list-container"}>
         <div className="sort-container">            
             <div className="search-bar">
                 <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder='Search for a country...'/>
@@ -75,7 +75,7 @@ const handleSelect = (e) => {
             {
                 countries.length > 0 &&
                 countries.map((country, index) => (
-                    <CountryCard key={index} infos={country} />
+                    <CountryCard key={index} infos={country} mode={mode}/>
                 ))
             }
         </div>

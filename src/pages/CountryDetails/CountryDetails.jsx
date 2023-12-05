@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {Link, useParams} from 'react-router-dom';
 import './CountryDetails.css';
 
-export default function CountryDetails() {
+export default function CountryDetails({mode}) {
     const {country} = useParams();
     const [countryDetails, setCountryDetails] = useState();
     const [borderCountries, setBorderCountries] = useState([]);
@@ -19,7 +19,6 @@ export default function CountryDetails() {
     useEffect(() => {
         if(countryDetails) {
             if(countryDetails.borders) {
-
                 const codes = countryDetails.borders.join(',');
                 fetch(`https://restcountries.com/v3.1/alpha?codes=${codes}`)
                 .then(res => res.json())
@@ -27,7 +26,6 @@ export default function CountryDetails() {
                 .catch(err => console.log(err));
             }
         }
-        console.log(borderCountries);
     }, [countryDetails])
 
     const getCountryDetails = (country) => {
@@ -40,10 +38,10 @@ export default function CountryDetails() {
     }
 
   return (
-    <section>
-        <div className="backBtn">
+    <section className={mode === "dark" ? "country-details-container dark" : "country-details-container"}>
+        <Link to="/" className="backBtn">
             <p>Back</p>
-        </div>
+        </Link>
         {
             countryDetails &&
         <div className="country">
@@ -60,7 +58,7 @@ export default function CountryDetails() {
                     </div>
                     <div>
                         <p><strong>Top Level Domain: </strong> {countryDetails.tld}</p>
-                        {/* <p><strong>Currencies: </strong> {country.currencies}</p> */}
+                        <p><strong>Currencies: </strong> {Object.values(countryDetails.currencies)[0].name}</p>
                         <p><strong>Languages: </strong> {Object.values(countryDetails.languages)[0]}</p>
                     </div>
                 </div>
@@ -71,10 +69,7 @@ export default function CountryDetails() {
                         borderCountries.map((country, index) => (
                             <button><Link key={index} to={`/details/${country.name.common}`}>{country.name.common}</Link></button>
                         ))
-                    }
-                    {/* <button>Belgium</button>
-                    <button>Germany</button>
-                    <button>Netherlands</button> */}
+                    }                    
                 </div>
             </div>
         </div>

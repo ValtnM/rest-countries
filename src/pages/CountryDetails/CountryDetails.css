@@ -1,3 +1,29 @@
+.country-details-container {
+    padding: 30px;
+    min-height: 100vh;
+}
+
+.country-details-container.dark {
+    background: #202c36;
+    color: white;
+}
+
+.country-details-container p {
+    margin: 0;
+}
+
+.backBtn {
+    display: inline-block;
+    padding: 7px 30px;
+    background: white;
+    color: #111517 ;
+}
+
+.dark .backBtn{
+    background: #2B3844;
+    color: white;
+}
+
 .country {
     display: flex;
     justify-content: space-around;
@@ -32,9 +58,18 @@ h2 {
 }
 
 .neighbours button {
-    padding: 10px 20px;
+    padding: 7px 25px;
     margin-left: 10px;
-    border: 2px rgb(206, 206, 206) solid;
     border-radius: 5px;
     background: white;
+    color: black;
+}
+
+.dark .neighbours button {
+    background: #2B3844;
+    color: white;
+}
+
+.dark a {
+    color: white;
 }

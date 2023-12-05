@@ -1,7 +1,23 @@
 nav {
+    /* max-width: 1600px; */
     /* width: 100%; */
+    margin: auto;
     padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+nav.dark {
+    background: #2b3844;
+    color: white;
+}
+
+.dark-toggle {
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dark-toggle p {
+    margin-left: 10px;
 }

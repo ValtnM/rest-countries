@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
 import './CountryCard.css';
 
-export default function CountryCard({infos}) {
+export default function CountryCard({infos, mode}) {
   return (
-    <section>
-
-    <Link to={`/details/${infos.name.common}`}>
+    <Link className={mode === 'dark' ? 'dark country-card-container' :'country-card-container'} to={`/details/${infos.name.common}`}>
         <img src={infos.flags.png} alt="" />
         <div className="country-details">
             <h2>{infos.name.common}</h2>
@@ -14,6 +12,5 @@ export default function CountryCard({infos}) {
             <p><strong>Capital:</strong> {infos.capital ? infos.capital[0] : ""}</p>
         </div>
     </Link>
-    </section>
   )
 }
