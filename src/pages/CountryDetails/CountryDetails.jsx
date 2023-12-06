@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {Link, useParams} from 'react-router-dom';
 import './CountryDetails.css';
 
@@ -10,16 +10,50 @@ export default function CountryDetails({mode}) {
     const [countryDetails, setCountryDetails] = useState();
     const [borderCountries, setBorderCountries] = useState([]);
 
+    
+    
 
-    useEffect(() => {
-        getCountryDetails(country);        
-    }, [])
 
+    // let countryDetails = useMemo(() => {
+    //     console.log(country);
+    //     return getCountryDetails(country)
+    // }, [])
+
+    // const countryDetails = useMemo(() => {
+    //     console.log("country: ", country);
+    //     return getCountryDetails(country)
+    // }, [country])
+
+    // const borderCountries = useMemo(() => {
+    //     console.log("details: ", countryDetails);
+    //     return getBordersCountry();        
+    // }, [countryDetails])
+    
+
+    // useEffect(() => {
+    //     getCountryDetails(country);        
+    // }, [])
+    
     useEffect(() => {        
-        getCountryDetails(country);
+        getCountryDetails(country);        
     }, [country])
 
     useEffect(() => {
+        getBordersCountry(countryDetails);        
+    }, [countryDetails])
+
+    const getCountryDetails = (country) => {
+        console.log("getDetails: ", country);
+        if(country) {
+            fetch(`https://restcountries.com/v3.1/name/${country}`)
+            .then(res => res.json())
+            .then(data => setCountryDetails(data[0]))
+            .catch(err => console.log(err));
+        }
+    }
+
+    const getBordersCountry = (countryDetails) => {
+        console.log("getBorder: ", countryDetails);
         if(countryDetails) {
             if(countryDetails.borders) {
                 const codes = countryDetails.borders.join(',');
@@ -29,16 +63,8 @@ export default function CountryDetails({mode}) {
                 .catch(err => console.log(err));
             }
         }
-    }, [countryDetails])
-
-    const getCountryDetails = (country) => {
-        if(country) {
-            fetch(`https://restcountries.com/v3.1/name/${country}`)
-            .then(res => res.json())
-            .then(data => setCountryDetails(data[0]))
-            .catch(err => console.log(err));
-        }
     }
+
 
   return (
     <section className={mode === "dark" ? "country-details-container dark" : "country-details-container"}>
@@ -57,7 +83,7 @@ export default function CountryDetails({mode}) {
                 <div className="details">
                     <div>
                         <p><strong>Native Name: </strong> {Object.values(countryDetails.name.nativeName)[0].common}</p>
-                        <p><strong>Population: </strong> {countryDetails.population}</p>
+                        <p><strong>Population: </strong> {countryDetails.population.toLocaleString()}</p>
                         <p><strong>Region: </strong> {countryDetails.region}</p>
                         <p><strong>Sub Region: </strong> {countryDetails.subregion}</p>
                         <p><strong>Capital: </strong> {countryDetails.capital}</p>
