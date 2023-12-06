@@ -10,10 +10,6 @@ export default function CountryDetails({mode}) {
     const [countryDetails, setCountryDetails] = useState();
     const [borderCountries, setBorderCountries] = useState([]);
 
-    
-    
-
-
     // let countryDetails = useMemo(() => {
     //     console.log(country);
     //     return getCountryDetails(country)
@@ -39,25 +35,23 @@ export default function CountryDetails({mode}) {
     }, [country])
 
     useEffect(() => {
-        getBordersCountry(countryDetails);        
+        getBorderCountries(countryDetails);        
     }, [countryDetails])
 
     const getCountryDetails = (country) => {
-        console.log("getDetails: ", country);
         if(country) {
-            fetch(`https://restcountries.com/v3.1/name/${country}`)
+            fetch(`https://restcountries.com/v3.1/name/${country}?fields=name,flags,population,region,subregion,capital,tld,currencies,languages,borders,ccn3`)
             .then(res => res.json())
             .then(data => setCountryDetails(data[0]))
             .catch(err => console.log(err));
         }
     }
 
-    const getBordersCountry = (countryDetails) => {
-        console.log("getBorder: ", countryDetails);
+    const getBorderCountries = (countryDetails) => {
         if(countryDetails) {
             if(countryDetails.borders) {
                 const codes = countryDetails.borders.join(',');
-                fetch(`https://restcountries.com/v3.1/alpha?codes=${codes}`)
+                fetch(`https://restcountries.com/v3.1/alpha?codes=${codes}&fields=name,flags,population,region,subregion,capital,tld,currencies,languages,borders,ccn3`)
                 .then(res => res.json())
                 .then(data => setBorderCountries(data))
                 .catch(err => console.log(err));
@@ -100,7 +94,7 @@ export default function CountryDetails({mode}) {
                     {
                         borderCountries.length > 0 &&
                         borderCountries.map((country, index) => (
-                            <button><Link key={index} to={`/details/${country.name.common}`}>{country.name.common}</Link></button>
+                            <button key={country.ccn3}><Link  to={`/details/${country.name.common}`}>{country.name.common}</Link></button>
                         ))
                     }                    
                     </div>

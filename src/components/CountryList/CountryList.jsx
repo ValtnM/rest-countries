@@ -13,11 +13,13 @@ export default function CountryList({mode}) {
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        fetch('https://restcountries.com/v3.1/all')
+        // fetch('https://restcountries.com/v3.1/')
+        fetch('https://restcountries.com/v3.1/all?fields=name')
         .then(res => res.json())
         .then(data => {
-            setCountries(data);
-            setRegions(selectContinents(data));
+            console.log(data);
+            // setCountries(data);
+            // setRegions(selectContinents(data));
         })
         .catch(err => console.log(err));
     }, [])
